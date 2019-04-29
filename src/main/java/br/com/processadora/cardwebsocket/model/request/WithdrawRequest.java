@@ -1,5 +1,7 @@
 package br.com.processadora.cardwebsocket.model.request;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -8,7 +10,7 @@ public class WithdrawRequest {
 
 	private String action;
 	private String cardnumber;
-	private String amount;
+	private double amount;
 
 	public String getAction() {
 		return action;
@@ -26,11 +28,11 @@ public class WithdrawRequest {
 		this.cardnumber = cardnumber;
 	}
 
-	public String getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

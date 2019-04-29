@@ -17,6 +17,9 @@ public class TransactionResponse {
 		this.authorizationCode = authorizationCode;
 	}
 
+	public TransactionResponse() {
+	}
+
 	public String getAction() {
 		return action;
 	}
