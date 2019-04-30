@@ -8,11 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import br.com.processadora.cardwebsocket.domain.enums.TransactionEnum;
 import br.com.processadora.cardwebsocket.service.exception.WithdrawInsuficienteException;
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonPropertyOrder({ "cardNumber", "availableAmount", "transactions" })
 @Entity
 public class Card implements Serializable {
 
@@ -22,7 +29,7 @@ public class Card implements Serializable {
 	private String cardNumber;
 	private double availableAmount;
 
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy = "card")
 	private List<Transaction> transactions = new ArrayList<>();
 
@@ -52,8 +59,8 @@ public class Card implements Serializable {
 	/**
 	 * @param cardnumber the cardnumber to set
 	 */
-	public void setCardnumber(String cardnumber) {
-		this.cardNumber = cardnumber;
+	public void setCardnumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	/**
@@ -91,7 +98,7 @@ public class Card implements Serializable {
 	 */
 	public void withdraw(double amount) throws WithdrawInsuficienteException {
 		if (amount < 0) {
-			throw new IllegalArgumentException("Você tentou sacar" + " um valor negativo");
+			throw new IllegalArgumentException("Você tentou sacar" + amount + " um valor negativo");
 		} else if (this.availableAmount < amount) {
 			throw new WithdrawInsuficienteException(TransactionEnum.SALDO_INSUFICIENTE.getCodigo());
 		}

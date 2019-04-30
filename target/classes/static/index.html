@@ -25,11 +25,17 @@
                 </div>
             </form>
         </div>
+     </div>
+     <div class="row">
         <div class="col-md-6">
-            <form class="form-inline">
+            <form>
                 <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="cardnumber" class="form-control" placeholder="Your cardnumber here...">
+                    <label for="cardnumber">card number</label>
+                    <input type="text" id="cardnumber" class="form-control" placeholder="cardnumber here...">
+                 </div>
+                 <div class="form-group">
+                    <label for=amount>amount?</label>
+                    <input type="text" id="amount" class="form-control" placeholder="amount here...">
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>
@@ -40,10 +46,10 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Transactions</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="cards">
                 </tbody>
             </table>
         </div>

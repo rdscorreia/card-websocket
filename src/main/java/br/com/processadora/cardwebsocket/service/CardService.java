@@ -49,9 +49,11 @@ public class CardService {
 				
 				Transaction transaction = new Transaction();
 				transaction.setCard(card.get());
-				transaction.setDate(LocalDateTime.now());	
+				transaction.setDate(LocalDateTime.now());
+				transaction.setAmount(request.getAmount());
 				
 				transactionRepository.save(transaction);
+				cardRepository.save(card.get());
 				
 				return new TransactionResponse(WITHDRAW, TransactionEnum.APROVADA.getCodigo(),
 						RandomStringUtils.randomNumeric(AUTH_CODE_LENGTH));

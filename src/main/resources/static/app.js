@@ -9,7 +9,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#cards").html("");
 }
 
 function connect() {
@@ -18,8 +18,8 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/withdraw/response', function (greeting) {
-            showGreeting(JSON.parse(greeting.body));
+        stompClient.subscribe('/withdraw/response', function (Transaction) {
+            showTransaction(JSON.parse(Transaction.body));
         });
     });
 }
@@ -33,11 +33,11 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/withdraw", {}, JSON.stringify({'cardnumber': $("#cardnumber").val()}));
+    stompClient.send("/app/withdraw", {}, JSON.stringify({'action' : 'withdraw', 'cardnumber': $("#cardnumber").val(), 'amount' : $("#amount").val()}));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message.action + "</td></tr>");
+function showTransaction(message) {
+    $("#cards").append("<tr><td>Action: " + message.action + "</td> <td>Code: " + message.code + "</td> <td>Autorization Code: " + message.authorizationCode + "</td></tr>");
 }
 
 $(function () {

@@ -24,13 +24,10 @@ public class CardController {
 	@MessageMapping("/withdraw")
 	@SendTo("/withdraw/response")
 	public TransactionResponse withdraw(WithdrawRequest request) throws Exception {
-		Thread.sleep(1000); // simulated delay
+		Thread.sleep(100); // simulated delay
 		System.out.println(request.toString());
 		
-		cardService.withdraw(request);
-		
-		
-		return new TransactionResponse(request.getCardnumber(), null, null);
+		return cardService.withdraw(request);
 	}
 
 }
