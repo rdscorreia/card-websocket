@@ -10,6 +10,17 @@ public class WithdrawRequest {
 	private String cardnumber;
 	private double amount;
 
+	/**
+	 * @param action
+	 * @param cardnumber
+	 * @param amount
+	 */
+	public WithdrawRequest(String action, String cardnumber, double amount) {
+		this.action = action;
+		this.cardnumber = cardnumber;
+		this.amount = amount;
+	}
+
 	public String getAction() {
 		return action;
 	}
